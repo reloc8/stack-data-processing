@@ -21,6 +21,8 @@ DEFAULT_LAMBDA_LOG_RETENTION = logs.RetentionDays.ONE_WEEK
 class MongoDBConfiguration:
 
     uri: AnyStr
+    database: AnyStr
+    collection: AnyStr
     max_page_size: AnyStr
 
 
@@ -67,7 +69,7 @@ class DataProcessingStack(core.Stack):
         lambda_geocode_property = lambda_.Function(
             self,
             'GeocodeProperty',
-            code=lambda_.AssetCode('stack/lambda/geocode_property/1.0.1/python/geocode_property'),
+            code=lambda_.AssetCode('stack/lambda/geocode_property/1.1.0/python/geocode_property'),
             timeout=core.Duration.seconds(15),
             description='',
             function_name='GeocodeProperty',
@@ -83,7 +85,7 @@ class DataProcessingStack(core.Stack):
         lambda_fetch_properties = lambda_.Function(
             self,
             'FetchProperties',
-            code=lambda_.AssetCode('stack/lambda/fetch_properties/1.0.1/python/fetch_properties'),
+            code=lambda_.AssetCode('stack/lambda/fetch_properties/1.1.0/python/fetch_properties'),
             timeout=core.Duration.seconds(10),
             description='',
             function_name='FetchProperties',
@@ -110,7 +112,7 @@ class DataProcessingStack(core.Stack):
         layer_geocode_property = lambda_.LayerVersion(
             self,
             'GeocodePropertyLibs',
-            code=lambda_.Code.from_asset('stack/lambda/geocode_property/1.0.1/'),
+            code=lambda_.Code.from_asset('stack/lambda/geocode_property/1.1.0/'),
             description='',
             layer_version_name='GeocodePropertyLibs',
             compatible_runtimes=[DEFAULT_LAMBDA_RUNTIME]
@@ -119,7 +121,7 @@ class DataProcessingStack(core.Stack):
         layer_fetch_properties = lambda_.LayerVersion(
             self,
             'FetchPropertiesLibs',
-            code=lambda_.Code.from_asset('stack/lambda/fetch_properties/1.0.1/'),
+            code=lambda_.Code.from_asset('stack/lambda/fetch_properties/1.1.0/'),
             description='',
             layer_version_name='FetchPropertiesLibs',
             compatible_runtimes=[DEFAULT_LAMBDA_RUNTIME]
@@ -181,10 +183,14 @@ class DataProcessingStack(core.Stack):
         # ENVIRONMENT VARIABLES
 
         lambda_geocode_property.add_environment(key='MONGODB_URI', value=mongodb_config.uri)
+        lambda_geocode_property.add_environment(key='MONGODB_DATABASE', value=mongodb_config.database)
+        lambda_geocode_property.add_environment(key='MONGODB_COLLECTION', value=mongodb_config.collection)
         lambda_geocode_property.add_environment(
             key='API_ACCESS_TOKEN_GEOCODING', value=access_keys_config.geocoding
         )
         lambda_fetch_properties.add_environment(key='MONGODB_URI', value=mongodb_config.uri)
+        lambda_fetch_properties.add_environment(key='MONGODB_DATABASE', value=mongodb_config.database)
+        lambda_fetch_properties.add_environment(key='MONGODB_COLLECTION', value=mongodb_config.collection)
         lambda_fetch_properties.add_environment(key='MONGODB_MAX_PAGE_SIZE', value=mongodb_config.max_page_size)
 
         # EXPOSED ENTITIES

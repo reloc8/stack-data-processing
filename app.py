@@ -33,7 +33,9 @@ data_processing_stack = DataProcessingStack(
     'DataProcessingStack',
     mongodb_config=MongoDBConfiguration(
         uri='MockUri',
-        max_page_size='10'
+        max_page_size='10',
+        database='timeSeriesDB',
+        collection='properties'
     ),
     access_keys_config=AccessKeysConfiguration(
         geocoding='MockAccessKey'

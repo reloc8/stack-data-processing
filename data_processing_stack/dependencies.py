@@ -34,6 +34,6 @@ class Dependency:
 
 DEPENDENCIES = [
     Dependency(project_name='lambda-dispatch-stream', package_name='dispatch_stream', release_version='1.0.0'),
-    Dependency(project_name='lambda-geocode-property', package_name='geocode_property', release_version='1.1.0'),
+    Dependency(project_name='lambda-geocode-property', package_name='geocode_property', release_version='1.1.3'),
     Dependency(project_name='lambda-fetch-properties', package_name='fetch_properties', release_version='1.1.0')
 ]

@@ -69,7 +69,7 @@ class DataProcessingStack(core.Stack):
         lambda_geocode_property = lambda_.Function(
             self,
             'GeocodeProperty',
-            code=lambda_.AssetCode('stack/lambda/geocode_property/1.1.0/python/geocode_property'),
+            code=lambda_.AssetCode('stack/lambda/geocode_property/1.1.3/python/geocode_property'),
             timeout=core.Duration.seconds(15),
             description='',
             function_name='GeocodeProperty',
@@ -112,7 +112,7 @@ class DataProcessingStack(core.Stack):
         layer_geocode_property = lambda_.LayerVersion(
             self,
             'GeocodePropertyLibs',
-            code=lambda_.Code.from_asset('stack/lambda/geocode_property/1.1.0/'),
+            code=lambda_.Code.from_asset('stack/lambda/geocode_property/1.1.3/'),
             description='',
             layer_version_name='GeocodePropertyLibs',
             compatible_runtimes=[DEFAULT_LAMBDA_RUNTIME]

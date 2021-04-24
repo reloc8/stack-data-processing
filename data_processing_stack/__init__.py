@@ -151,7 +151,7 @@ class DataProcessingStack(core.Stack):
             description='GraphQL API',
             cloud_watch_role=True
         )
-        api_gateway_graphql.root.add_resource('graphql').add_method('POST')
+        api_gateway_graphql.root.add_resource('graphql').add_method('GET')
 
         # DYNAMODB PERMISSIONS
         lambda_dispatch_stream.add_event_source(event_sources.DynamoEventSource(

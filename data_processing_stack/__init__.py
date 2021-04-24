@@ -121,7 +121,7 @@ class DataProcessingStack(core.Stack):
         layer_fetch_properties = lambda_.LayerVersion(
             self,
             'FetchPropertiesLibs',
-            code=lambda_.Code.from_asset('stack/lambda/fetch_properties/1.1.0/'),
+            code=lambda_.Code.from_asset('stack/lambda/fetch_properties/1.2.0/'),
             description='',
             layer_version_name='FetchPropertiesLibs',
             compatible_runtimes=[DEFAULT_LAMBDA_RUNTIME]

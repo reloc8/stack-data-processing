@@ -85,7 +85,7 @@ class DataProcessingStack(core.Stack):
         lambda_fetch_properties = lambda_.Function(
             self,
             'FetchProperties',
-            code=lambda_.AssetCode('stack/lambda/fetch_properties/1.1.0/python/fetch_properties'),
+            code=lambda_.AssetCode('stack/lambda/fetch_properties/1.2.0/python/fetch_properties'),
             timeout=core.Duration.seconds(10),
             description='',
             function_name='FetchProperties',

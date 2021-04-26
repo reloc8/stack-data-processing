@@ -85,7 +85,7 @@ class DataProcessingStack(core.Stack):
         lambda_fetch_properties = lambda_.Function(
             self,
             'FetchProperties',
-            code=lambda_.AssetCode('stack/lambda/fetch_properties/1.3.0/python/fetch_properties'),
+            code=lambda_.AssetCode('stack/lambda/fetch_properties/1.3.1/python/fetch_properties'),
             timeout=core.Duration.seconds(10),
             description='',
             function_name='FetchProperties',
@@ -121,7 +121,7 @@ class DataProcessingStack(core.Stack):
         layer_fetch_properties = lambda_.LayerVersion(
             self,
             'FetchPropertiesLibs',
-            code=lambda_.Code.from_asset('stack/lambda/fetch_properties/1.3.0/'),
+            code=lambda_.Code.from_asset('stack/lambda/fetch_properties/1.3.1/'),
             description='',
             layer_version_name='FetchPropertiesLibs',
             compatible_runtimes=[DEFAULT_LAMBDA_RUNTIME]

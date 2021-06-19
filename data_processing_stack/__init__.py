@@ -151,7 +151,16 @@ class DataProcessingStack(core.Stack):
             description='GraphQL API',
             cloud_watch_role=True
         )
-        api_gateway_graphql.root.add_resource('graphql').add_method('GET')
+        api_gateway_graphql_resource = api_gateway_graphql.root.add_resource('graphql')
+        api_gateway_graphql_resource.add_method('GET', api_key_required=False)
+        api_gateway_graphql.add_usage_plan(
+            'GraphQLUsagePlan',
+            name='GraphQLUsagePlan',
+            throttle=api_gateway.ThrottleSettings(
+                rate_limit=1,
+                burst_limit=1
+            )
+        )
 
         # DYNAMODB PERMISSIONS
         lambda_dispatch_stream.add_event_source(event_sources.DynamoEventSource(
